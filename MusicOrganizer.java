@@ -1,6 +1,6 @@
     import java.util.ArrayList;
     import java.util.Random;
-    
+    import java.util.Collections;
     /**
      * A class to hold details of audio tracks.
      * Individual tracks may be played.
@@ -139,13 +139,21 @@
      public void randomPlay()
      {
          if(tracks.size() > 0) {
-             Random rand = new Random();
-             int index = rand.nextInt(tracks.size());
+             Random r = new Random();
+             int index = r.nextInt(tracks.size());
              playTrack(index);
             }
      }
      
-     
+    public void randomPlayAll()
+    {
+        ArrayList<Track> songsLeft = new ArrayList<Track>(tracks);
+        Collections.shuffle(songsLeft);
+        for(Track tracks : songsLeft) {
+            player.playSample(tracks.getFilename());
+        }
+
+ }
 
     /**
      * Determine whether the given index is valid for the collection.
